@@ -1,0 +1,75 @@
+name: Chalkbox
+options:
+  bundleIdPrefix: com.shimondeitel.creep
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  Chalkbox:
+    type: application
+    platform: iOS
+    sources:
+      - path: Chalkbox
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.creep
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: Chalkbox/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  ChalkboxTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: ChalkboxTests
+      - path: Chalkbox.storekit
+    dependencies:
+      - target: Chalkbox
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.creep.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  ChalkboxUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: ChalkboxUITests
+    dependencies:
+      - target: Chalkbox
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.creep.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  Chalkbox:
+    build:
+      targets:
+        Chalkbox: all
+        ChalkboxTests: [test]
+        ChalkboxUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: Chalkbox.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: Chalkbox.storekit
+      targets:
+        - ChalkboxTests
+        - ChalkboxUITests
+    archive:
+      config: Release

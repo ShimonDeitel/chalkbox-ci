@@ -1,0 +1,29 @@
+{
+  "identifier" : "chalkbox",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "chalkbox_pro_unlock",
+      "localizations" : [
+        {
+          "description" : "Unlocks unlimited tracked supplies and history",
+          "displayName" : "Chalkbox Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "chalkbox_pro_unlock",
+      "referenceName" : "Chalkbox Pro Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_askToBuyEnabled" : false
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
