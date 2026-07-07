@@ -1,6 +1,7 @@
 import XCTest
 @testable import Chalkbox
 
+@MainActor
 final class ChalkboxTests: XCTestCase {
     var store: ChalkboxStore!
     let testFile = "chalkbox_test_items.json"
