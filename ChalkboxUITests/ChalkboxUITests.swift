@@ -46,7 +46,11 @@ final class ChalkboxUITests: XCTestCase {
     func testLowStockBannerShowsForLowItem() throws {
         let app = launchApp()
         XCTAssertTrue(app.staticTexts["Pencils"].waitForExistence(timeout: 8))
-        XCTAssertTrue(app.otherElements["lowStockBanner"].waitForExistence(timeout: 8))
+        // accessibilityElement(children: .combine) on a Text-dominant HStack surfaces
+        // as a staticText/other element depending on OS version, so match on identifier
+        // across every element type rather than assuming a specific XCUIElementType.
+        let banner = app.descendants(matching: .any).matching(identifier: "lowStockBanner").firstMatch
+        XCTAssertTrue(banner.waitForExistence(timeout: 8))
     }
 
     func testAddNewSupplyFlow() throws {
