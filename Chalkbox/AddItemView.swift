@@ -29,6 +29,7 @@ struct AddItemView: View {
                         .accessibilityIdentifier("thresholdStepper")
                 }
             }
+            .scrollDismissesKeyboard(.immediately)
             .dismissKeyboardOnTap()
             .navigationTitle("Add Supply")
             .toolbar {

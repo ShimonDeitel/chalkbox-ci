@@ -24,10 +24,10 @@ struct DismissKeyboardOnTap: ViewModifier {
     func body(content: Content) -> some View {
         content.simultaneousGesture(
             TapGesture().onEnded {
-                UIApplication.shared.sendAction(
-                    #selector(UIResponder.resignFirstResponder),
-                    to: nil, from: nil, for: nil
-                )
+                UIApplication.shared.connectedScenes
+                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+                    .first?
+                    .endEditing(true)
             }
         )
     }
