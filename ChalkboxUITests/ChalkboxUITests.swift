@@ -45,6 +45,7 @@ final class ChalkboxUITests: XCTestCase {
 
     func testLowStockBannerShowsForLowItem() throws {
         let app = launchApp()
+        XCTAssertTrue(app.staticTexts["Pencils"].waitForExistence(timeout: 8))
         XCTAssertTrue(app.otherElements["lowStockBanner"].waitForExistence(timeout: 8))
     }
 
@@ -66,8 +67,8 @@ final class ChalkboxUITests: XCTestCase {
         XCTAssertTrue(nameField.waitForExistence(timeout: 5))
         nameField.tap()
         XCTAssertTrue(app.keyboards.element.waitForExistence(timeout: 5))
-        // Tap on empty space within the form (the navigation title area) to dismiss.
-        app.navigationBars.firstMatch.tap()
+        // Tap a Form section header (real content the dismissKeyboardOnTap gesture is attached to).
+        app.staticTexts["Stock"].tap()
         XCTAssertFalse(app.keyboards.element.waitForExistence(timeout: 3))
     }
 

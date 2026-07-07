@@ -45,12 +45,21 @@ jobs:
         run: |
           UDID="${{ steps.sim.outputs.udid }}"
           xcrun simctl boot "$UDID" || true
-          if ! timeout 120 xcrun simctl bootstatus "$UDID" -b; then
-            echo "Boot status timed out, retrying with erase..."
+          xcrun simctl bootstatus "$UDID" -b &
+          BOOT_PID=$!
+          for i in $(seq 1 120); do
+            if ! kill -0 $BOOT_PID 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if kill -0 $BOOT_PID 2>/dev/null; then
+            echo "Boot status timed out, killing and retrying with erase..."
+            kill -9 $BOOT_PID 2>/dev/null || true
             xcrun simctl shutdown "$UDID" || true
             xcrun simctl erase "$UDID" || true
             xcrun simctl boot "$UDID"
             xcrun simctl bootstatus "$UDID" -b
+          else
+            wait $BOOT_PID
           fi
 
       - name: Run unit + UI tests (must fail job on failure)
