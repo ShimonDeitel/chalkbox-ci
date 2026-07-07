@@ -103,6 +103,7 @@ struct ChalkboxHomeView: View {
         .background(CBTheme.busYellow.opacity(0.25))
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.horizontal)
+        .accessibilityElement(children: .combine)
         .accessibilityIdentifier("lowStockBanner")
     }
 }
